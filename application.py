@@ -1,11 +1,12 @@
 from flask import Flask, request, jsonify
 import openai
+import os
 from flask_cors import CORS
 
 application = Flask(__name__)
 CORS(application)
 # Define your OpenAI API key here. Ensure this key is kept secure and not exposed.
-openai.api_key = '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'
+openai.api_key = os.getenv('gre_gpt_api_key')
 
 @application.route('/')
 def home():
