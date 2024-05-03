@@ -4,7 +4,7 @@ import os
 from flask_cors import CORS
 
 application = Flask(__name__)
-CORS(application)  # This enables CORS for all routes, allowing requests from any origin
+CORS(application)  # Enable CORS for all domains and routes
 
 # Setting the OpenAI API key from environment variables
 openai.api_key = os.getenv('gre_gpt_api_key')
@@ -15,14 +15,13 @@ def home():
 
 @application.route('/fetch-issue', methods=['GET'])
 def fetch_issue():
-    """Fetch a new issue task from the GPT model."""
+    """Fetch a new issue task from the GPT model using the updated API."""
     try:
-        response = openai.Completion.create(
-            model="gpt-3.5-turbo",  # Use an appropriate model; adjust according to your API plan
-            prompt="Give me an issue task with instructions.",
-            max_tokens=150
+        response = openai.chat.completions.create(
+            model="gpt-3.5-turbo",  # Adjust the model as necessary
+            messages=[{"role": "user", "content": "Give me an issue task with instructions."}]
         )
-        issue_task = response.choices[0].text.strip()
+        issue_task = response['choices'][0]['message']['content'].strip()
         return jsonify({'issue_task': issue_task}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
@@ -38,12 +37,8 @@ def submit_essay():
     return jsonify({'score': score, 'feedback': feedback})
 
 def process_essay(essay):
-    """Placeholder function to simulate processing an essay.
-       Replace this with your actual method to evaluate essays."""
-    # Here, you would call the OpenAI API or another service to evaluate the essay
-    # Returning placeholder values for demonstration
+    """Placeholder function to simulate processing an essay."""
     return "Score Placeholder", "Feedback Placeholder"
 
 if __name__ == '__main__':
-    # Run the Flask application on the default host and port
     application.run(debug=False)  # It is recommended to turn off debug mode in production environments
