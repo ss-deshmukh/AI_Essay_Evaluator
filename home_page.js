@@ -6,7 +6,7 @@ document.getElementById('essayForm').onsubmit = function(event) {
 
     // Here you would normally send a request to your server
     // Example using Fetch API:
-    fetch('/submit-essay', {
+    fetch('https://essay-eval-heroku-4cb23fb0fd31.herokuapp.com/fetch-issue', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -15,6 +15,7 @@ document.getElementById('essayForm').onsubmit = function(event) {
     })
     .then(response => response.json())
     .then(data => {
+        console.log(data); //Processing data here
         responseArea.style.display = 'block';
         responseArea.innerHTML = `<p>Score: ${data.score}</p><p>Feedback: ${data.feedback}</p>`;
     })
