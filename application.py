@@ -4,9 +4,9 @@ import os
 from flask_cors import CORS
 
 application = Flask(__name__)
-CORS(application)  # Enable CORS for all routes to handle cross-origin requests
+CORS(application)  # This enables CORS for all routes, allowing requests from any origin
 
-# Load the OpenAI API key from environment variables for security
+# Setting the OpenAI API key from environment variables
 openai.api_key = os.getenv('gre_gpt_api_key')
 
 @application.route('/')
@@ -18,7 +18,7 @@ def fetch_issue():
     """Fetch a new issue task from the GPT model."""
     try:
         response = openai.Completion.create(
-            engine="gpt-3.5-turbo",  # Use an appropriate model; adjust according to your API plan
+            model="gpt-3.5-turbo",  # Use an appropriate model; adjust according to your API plan
             prompt="Give me an issue task with instructions.",
             max_tokens=150
         )
@@ -40,10 +40,10 @@ def submit_essay():
 def process_essay(essay):
     """Placeholder function to simulate processing an essay.
        Replace this with your actual method to evaluate essays."""
-    # This is where you would integrate with the API for actual essay scoring
-    # Currently returns placeholder values
+    # Here, you would call the OpenAI API or another service to evaluate the essay
+    # Returning placeholder values for demonstration
     return "Score Placeholder", "Feedback Placeholder"
 
 if __name__ == '__main__':
-    # Run the Flask application on the default host and port (5000 in debug mode)
-    application.run(debug=False)  # Turn off debug in production
+    # Run the Flask application on the default host and port
+    application.run(debug=False)  # It is recommended to turn off debug mode in production environments
