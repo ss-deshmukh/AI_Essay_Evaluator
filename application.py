@@ -18,10 +18,13 @@ def fetch_issue():
     """Fetch a new issue task from the GPT model using the updated API."""
     try:
         response = openai.chat.completions.create(
-            model="gpt-3.5-turbo",  # Adjust the model as necessary
-            messages=[{"role": "user", "content": "Give me an issue task with instructions."}]
+            model="gpt-3.5-turbo",  # Use the gpt-3.5-turbo model
+            messages=[{"role": "user", "content": "Give me an issue task with instructions."}],
+            max_tokens=150
         )
-        issue_task = response['choices'][0]['message']['content'].strip()
+        # Correctly parsing the response
+        issue_task = response.choices[0].message.content.strip()
+        
         return jsonify({'issue_task': issue_task}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
