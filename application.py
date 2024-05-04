@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 import openai
 import os
@@ -14,8 +14,8 @@ ASSISTANT_ID = "asst_xjUrpr5oEdoZZ2ay3d2MtEsM"
 FILE_ID = "file-0WJRwD4tDJVdyQwOseNw8Dbz"  # This should be the actual file ID of 'issue-pool.pdf' uploaded to OpenAI
 
 @application.route('/')
-def index():
-    return render_template('index.html')
+def home():
+    return "Welcome to the Essay Scoring Service!"
 
 @application.route('/fetch-issue', methods=['GET'])
 def fetch_issue():
