@@ -21,7 +21,7 @@ def home():
 def fetch_issue():
     try:
         # Create a Thread for the assistant to use
-        thread = openai.Thread.create(assistant_id=ASSISTANT_ID)
+        thread = openai.beta.threads.create(assistant_id=ASSISTANT_ID)
         thread_id = thread['id']
 
         # Create the initial message asking for an issue statement
