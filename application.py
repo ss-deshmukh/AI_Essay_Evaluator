@@ -1,11 +1,13 @@
 from flask import Flask, request, jsonify, render_template
+from flask_cors import CORS
 import openai
 import os
 
 application = Flask(__name__)
+CORS(application)  # Enable CORS for all domains and routes
 
 # Set the OpenAI API key from environment variables or secure storage
-openai.api_key = os.getenv('OPENAI_API_KEY')
+openai.api_key = os.getenv('gre_gpt_api_key')
 
 # Define constants for the assistant and the file
 ASSISTANT_ID = "asst_xjUrpr5oEdoZZ2ay3d2MtEsM"
