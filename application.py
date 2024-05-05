@@ -38,6 +38,7 @@ def fetch_issue():
         )
 
         # Storing thread id as local variable for next message in same conversation thread
+        global THREAD_ID 
         THREAD_ID = thread.id
 
         # Starting the run (this is where asistant computes a response)
@@ -72,7 +73,7 @@ def fetch_issue():
 def submit_essay():
     data = request.json
     essay = data['essay']
-    thread_id = data['thread_id']
+    # thread_id = data['thread_id']
 
     try:
         
