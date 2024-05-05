@@ -34,7 +34,7 @@ document.getElementById('essayForm').onsubmit = function(event) {
         console.log(data); // Log and process the response data here
         responseArea.style.display = 'block';
         // Display the evaluation response in the response area
-        responseArea.textContent = `Evaluation: ${data.evaluation_message}`;
+        responseArea.textContent = `Evaluation: ${data.evaluation}`;
     })
     .catch(error => console.error('Error:', error));
 };
