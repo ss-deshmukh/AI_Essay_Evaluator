@@ -53,9 +53,9 @@ def fetch_issue():
         
         response_message = messages.data.content.text.value
 
-        return jsonify({"issue_statement": response_message}), 200
+        return jsonify({"issue_statement": messages}), 200
     except Exception as e:
-        return  messages   #jsonify({"error": str(e)}), 500
+        return jsonify({"error": str(e)}), 500
 
 
 #changes pending for Submit Essay -----------
