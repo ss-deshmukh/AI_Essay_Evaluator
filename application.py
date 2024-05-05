@@ -22,10 +22,10 @@ def home():
 def fetch_issue():
     try:
 
+        # Retrieving Essay_Eval assistant GPT
         assistant = openai.beta.assistants.retrieve(ASSISTANT_ID)
 
-
-        # Create a Thread for the assistant to use
+        # Create a Thread with an opening message to initate conversation
         thread = openai.beta.threads.create(
         # Create the initial message asking for an issue statement
             messages = [
@@ -36,30 +36,25 @@ def fetch_issue():
             ]
         )
 
-        # Start the run using the file for document retrieval
+        # Starting the run (this is where asistant computes a response)
         run = openai.beta.threads.runs.create(
             thread_id=thread.id,
             assistant_id = assistant.id
         )
 
-
+        # crude way to give enought time for assistant to complete the run, research on pollin to change this methid 
         time.sleep(5)
 
+        # Checking if the run is complete
         if run.status == "completed":
             # Fetch the messages after the run is complete
-            try :
-                messages = openai.beta.threads.messages.retrieve(
-                    thread_id="thread_id"
-                )
-            except:
-                return messages == "This is causing Issue"
+            messages = openai.beta.threads.messages.list(thread_id=thread.id)
         
-        response_message = messages.data.content.text.value
+        response_message = messages.data[1].content[0].text.value
 
-        return jsonify({"issue_statement": messages}), 200
+        return jsonify({"issue_statement": response_message}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
 
 #changes pending for Submit Essay -----------
 
