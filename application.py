@@ -42,11 +42,17 @@ def fetch_issue():
             assistant_id = assistant.id
         )
 
-        # crude way to give enought time for assistant to complete the run, research on pollin to change this methid 
-        time.sleep(10)
-
+        # crude way to give enought time for assistant to complete the run, research on polling to change this method 
+        while run.status == "queued" or run.status == "in_progress":
+            run = openai.beta.threads.runs.retrieve(
+                thread_id=thread.id,
+                run_id=run.id,
+            )
+            time.sleep(0.5)
+    
         # Checking if the run is complete
         status = run.status
+
         # Fetch the messages after the run is complete
         list_messages = openai.beta.threads.messages.list(thread_id=thread.id)
         
