@@ -28,7 +28,7 @@ def fetch_issue():
         # Create a Thread for the assistant to use
         thread = openai.beta.threads.create(
         # Create the initial message asking for an issue statement
-            messages = [
+            fetch_issue_messages = [
                 {
                     "role":"user",
                     "content" : "Give me any random issue statement with instructions from the Issue pool document."
@@ -47,7 +47,7 @@ def fetch_issue():
 
         if run.status == "completed":
             # Fetch the messages after the run is complete
-                messages = openai.beta.threads.messages.list(
+                messages = openai.beta.threads.messages.retrieve(
                     thread_id="thread_id"
                 )
         
@@ -55,7 +55,7 @@ def fetch_issue():
 
         return jsonify({"issue_statement": response_message}), 200
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return  messages   #jsonify({"error": str(e)}), 500
 
 
 #changes pending for Submit Essay -----------
