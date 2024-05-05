@@ -47,9 +47,12 @@ def fetch_issue():
 
         if run.status == "completed":
             # Fetch the messages after the run is complete
+            try :
                 messages = openai.beta.threads.messages.retrieve(
                     thread_id="thread_id"
                 )
+            except:
+                return messages == "This is causing Issue"
         
         response_message = messages.data.content.text.value
 
