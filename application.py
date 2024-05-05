@@ -42,23 +42,23 @@ def fetch_issue():
 
         # Starting the run (this is where asistant computes a response)
         run = openai.beta.threads.runs.create(
-            thread_id=thread.id,
+            thread_id=THREAD_ID,
             assistant_id = assistant.id
         )
 
         # crude way to give enought time for assistant to complete the run, research on polling to change this method 
         while run.status == "queued" or run.status == "in_progress":
             run = openai.beta.threads.runs.retrieve(
-                thread_id=thread.id,
+                thread_id=THREAD_ID,
                 run_id=run.id,
             )
             time.sleep(0.5)
     
         # Checking if the run is complete
-        status = run.status
+        # status = run.status
 
         # Fetch the messages after the run is complete
-        list_messages = openai.beta.threads.messages.list(thread_id=thread.id)
+        list_messages = openai.beta.threads.messages.list(thread_id=THREAD_ID)
         
         response_message = list_messages.data[0].content[0].text.value #[-1].content[-1].text.value
 
@@ -82,26 +82,27 @@ def submit_essay():
 
         # Add the user's essay to the pre existing thread
         messages = openai.beta.threads.messages.create(
-            thread_id=thread.id,
+            thread_id=THREAD_ID,
             role="user",
             content=essay
         )
 
         # Continue the run to evaluate the essay
         run = openai.beta.threads.runs.create(
-            thread_id = thread.id,
+            thread_id = THREAD_ID,
             assistant_id= assistant.id
         )
 
         while run.status == "queued" or run.status == "in_progress":
             run = openai.beta.threads.runs.retrieve(
-                thread_id = thread.id,
+                thread_id = THREAD_ID,
                 run_id=run.id,
             )
             time.sleep(0.5)
 
         # Fetch the messages for evaluation
-        evaluation = openai.beta.threads.messages.list(thread_id = thread.id)
+        evaluation = openai.beta.threads.messages.list(thread_id = THREAD_ID)
+
         evaluation_message = evaluation.data[0].content[0].text.value
 
         return jsonify({"evaluation": evaluation_message}), 200
