@@ -42,15 +42,16 @@ def fetch_issue():
             assistant_id = assistant.id
         )
 
+
         time.sleep(5)
 
         if run.status == "completed":
             # Fetch the messages after the run is complete
                 messages = openai.beta.threads.messages.list(
-                    thread_id="thread_id",
+                    thread_id="thread_id"
                 )
         
-        response_message = messages.data[1].content.text.value
+        response_message = messages.data.content.text.value
 
         return jsonify({"issue_statement": response_message}), 200
     except Exception as e:
