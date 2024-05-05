@@ -12,6 +12,7 @@ openai.api_key = os.getenv('gre_gpt_api_key')
 
 # Define constants for the assistant and the file
 ASSISTANT_ID = "asst_xjUrpr5oEdoZZ2ay3d2MtEsM"
+THREAD_ID = ""
 #FILE_ID = "file-0WJRwD4tDJVdyQwOseNw8Dbz"  # This should be the actual file ID of 'issue-pool.pdf' uploaded to OpenAI
 
 @application.route('/')
@@ -36,6 +37,9 @@ def fetch_issue():
             ]
         )
 
+        # Storing thread id as local variable for next message in same conversation thread
+        THREAD_ID = thread.id
+
         # Starting the run (this is where asistant computes a response)
         run = openai.beta.threads.runs.create(
             thread_id=thread.id,
@@ -58,7 +62,7 @@ def fetch_issue():
         
         response_message = list_messages.data[0].content[0].text.value #[-1].content[-1].text.value
 
-        return response_message #jsonify({"issue_statement": response_message}), 200
+        return jsonify({"issue_statement": response_message}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -71,22 +75,34 @@ def submit_essay():
     thread_id = data['thread_id']
 
     try:
-        # Add the user's essay to the thread
-        message = openai.Message.create(
-            thread_id=thread_id,
+        
+        assistant = openai.beta.assistants.retrieve(ASSISTANT_ID)
+
+        thread = openai.beta.threads.retrieve(THREAD_ID)
+
+        # Add the user's essay to the pre existing thread
+        messages = openai.beta.threads.messages.create(
+            thread_id=thread.id,
             role="user",
             content=essay
         )
 
         # Continue the run to evaluate the essay
         run = openai.beta.threads.runs.create(
-            thread_id=thread_id,
-            assistant_id=ASSISTANT_ID
+            thread_id = thread.id,
+            assistant_id= assistant.id
         )
 
+        while run.status == "queued" or run.status == "in_progress":
+            run = openai.beta.threads.runs.retrieve(
+                thread_id = thread.id,
+                run_id=run.id,
+            )
+            time.sleep(0.5)
+
         # Fetch the messages for evaluation
-        messages = openai.Message.list(thread_id=thread_id)
-        evaluation_message = next((m['content'] for m in messages['data'] if m['role'] == 'assistant'), None)
+        evaluation = openai.beta.threads.messages.list(thread_id = thread.id)
+        evaluation_message = evaluation.data[0].content[0].text.value
 
         return jsonify({"evaluation": evaluation_message}), 200
     except Exception as e:
