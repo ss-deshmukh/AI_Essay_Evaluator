@@ -46,11 +46,11 @@ def fetch_issue():
         time.sleep(5)
 
         # Checking if the run is complete
-        if run.status == "completed":
-            # Fetch the messages after the run is complete
-            messages = openai.beta.threads.messages.list(thread_id=thread.id)
+        #if run.status == "completed":
+        # Fetch the messages after the run is complete
+        list_messages = openai.beta.threads.messages.list(thread_id=thread.id)
         
-        response_message = messages.data[1].content[0].text.value
+        response_message = list_messages.data[1].content[0].text.value
 
         return jsonify({"issue_statement": response_message}), 200
     except Exception as e:
