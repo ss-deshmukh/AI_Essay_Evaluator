@@ -12,7 +12,6 @@ openai.api_key = os.getenv('gre_gpt_api_key')
 
 # Define constants for the assistant and the file
 ASSISTANT_ID = "asst_xjUrpr5oEdoZZ2ay3d2MtEsM"
-THREAD_ID = ""
 #FILE_ID = "file-0WJRwD4tDJVdyQwOseNw8Dbz"  # This should be the actual file ID of 'issue-pool.pdf' uploaded to OpenAI
 
 @application.route('/')

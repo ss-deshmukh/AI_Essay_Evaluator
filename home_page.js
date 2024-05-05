@@ -7,7 +7,7 @@ document.getElementById('fetchIssue').addEventListener('click', function() {
         let issueDisplay = document.getElementById('issueDisplay');
         issueDisplay.textContent = data.issue_statement; // Display the fetched issue task
         // Store the thread_id for later use when submitting the essay
-        sessionStorage.setItem("currentThreadID", data.thread_id);
+        //sessionStorage.setItem("currentThreadID", data.thread_id);
     })
     .catch(error => console.error('Error fetching issue:', error));
 });
@@ -19,7 +19,7 @@ document.getElementById('essayForm').onsubmit = function(event) {
     let responseArea = document.getElementById('responseArea');
 
     // Assuming you have a way to store and retrieve the current thread_id
-    let thread_id = sessionStorage.getItem("currentThreadID");
+    //let thread_id = sessionStorage.getItem("currentThreadID");
 
     // Send a request to the Flask server to process the essay
     fetch('https://essay-eval-heroku-4cb23fb0fd31.herokuapp.com/submit-essay', {
@@ -27,7 +27,7 @@ document.getElementById('essayForm').onsubmit = function(event) {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({essay: essayText, thread_id: thread_id})
+        body: JSON.stringify({essay: essayText}) //, thread_id: thread_id})
     })
     .then(response => response.json())  // Handle response as JSON
     .then(data => {
