@@ -30,7 +30,7 @@ def fetch_issue():
         # Create the initial message asking for an issue statement
             messages = [
                 {
-                    "role":"user",
+                    "role":"user", 
                     "content" : "Give me any random issue statement with instructions from the Issue pool document."
                 }
             ]
@@ -50,7 +50,7 @@ def fetch_issue():
         # Fetch the messages after the run is complete
         list_messages = openai.beta.threads.messages.list(thread_id=thread.id)
         
-        response_message = list_messages.data #[-1].content[-1].text.value
+        response_message = list_messages.data #[-1].content[-1].text.valuecreate 
 
         return response_message #jsonify({"issue_statement": response_message}), 200
     except Exception as e:

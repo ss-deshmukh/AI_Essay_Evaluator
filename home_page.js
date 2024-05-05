@@ -24,7 +24,7 @@ document.getElementById('essayForm').onsubmit = function(event) {
 document.getElementById('fetchIssue').addEventListener('click', function() {
     // Fetch the issue task from the correct endpoint
     fetch('https://essay-eval-heroku-4cb23fb0fd31.herokuapp.com/fetch-issue')
-    .then(response => response) //.json())  // assuming the response is also in JSON format
+    .then(response => response.json())  // assuming the response is also in JSON format
     .then(data => {
         console.log(data); // Log the issue task
         document.getElementById('issueDisplay').textContent = data.issue_task; // Display the fetched issue task
