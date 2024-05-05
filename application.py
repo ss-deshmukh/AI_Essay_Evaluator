@@ -50,9 +50,9 @@ def fetch_issue():
         # Fetch the messages after the run is complete
         list_messages = openai.beta.threads.messages.list(thread_id=thread.id)
         
-        response_message = list_messages.data[1].content[-1].text.value
+        response_message = list_messages.data #[-1].content[-1].text.value
 
-        return jsonify({"issue_statement": response_message}), 200
+        return response_message #jsonify({"issue_statement": response_message}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
