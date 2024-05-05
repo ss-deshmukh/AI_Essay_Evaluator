@@ -52,7 +52,7 @@ def fetch_issue():
         
         response_message = list_messages.data[-1].content[-1].text.value 
 
-        return response_message, status #jsonify({"issue_statement": response_message}), 200
+        return str(response_message) +"|||||" + str(status) #jsonify({"issue_statement": response_message}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
