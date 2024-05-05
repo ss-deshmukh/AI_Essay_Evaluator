@@ -28,7 +28,7 @@ def fetch_issue():
         # Create a Thread for the assistant to use
         thread = openai.beta.threads.create(
         # Create the initial message asking for an issue statement
-            fetch_issue_messages = [
+            messages = [
                 {
                     "role":"user",
                     "content" : "Give me any random issue statement with instructions from the Issue pool document."
