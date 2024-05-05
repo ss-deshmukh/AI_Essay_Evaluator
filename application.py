@@ -43,7 +43,7 @@ def fetch_issue():
         )
 
         # crude way to give enought time for assistant to complete the run, research on pollin to change this methid 
-        time.sleep(5)
+        time.sleep(10)
 
         # Checking if the run is complete
         status = run.status
@@ -52,7 +52,7 @@ def fetch_issue():
         
         response_message = list_messages.data[-1].content[-1].text.value 
 
-        return str(response_message) +"|||||" + str(status) #jsonify({"issue_statement": response_message}), 200
+        return response_message #jsonify({"issue_statement": response_message}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
