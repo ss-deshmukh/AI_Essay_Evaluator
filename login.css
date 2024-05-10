@@ -1,0 +1,87 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f0f0; /* Light gray background */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container {
+    background-color: white; /* White background for the form */
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 350px;
+}
+
+.login-form h2 {
+    text-align: center;
+    color: #333; /* Dark gray for text */
+    margin-bottom: 2rem;
+}
+
+.input-group {
+    margin-bottom: 1rem;
+}
+
+.login-form input[type="email"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn {
+    padding: 0.8rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.login-btn {
+    background-color: #3b6ec0; /* Green button */
+    color: white;
+}
+
+.signup-btn {
+    background-color: #0ea60e; /* Pink button */
+    color: white;
+}
+
+.btn:last-child {
+    margin-right: 0;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.social-login p {
+    text-align: center;
+    color: #333;
+    margin: 1rem 0;
+}
+
+.google-btn {
+    background-color: #DB4437; /* Google blue */
+    color: rgb(252, 252, 252);
+    width: 100%;
+    
+}
+
+.google-btn:hover {
+    background-color: #DB4437; /* Darker blue */
+}
+

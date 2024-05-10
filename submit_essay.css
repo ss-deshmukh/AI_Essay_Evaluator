@@ -1,0 +1,103 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f0f0;
+    margin: 10px; /* Smaller margin around the body for minimal blank space */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 20px); /* Adjust height to account for smaller margin */
+}
+
+.container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 90%; /* Increased width */
+    max-width: 90%; /* Max width also increased to cover more space */
+    height: auto; /* Height to automatically adjust */
+    max-height: 90vh; /* Maximum height to ensure it doesn't overflow the viewport */
+    overflow: auto; /* Allows scrolling within the container if content exceeds the height */
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.task-fetcher, .essay-form {
+    margin-bottom: 20px;
+}
+
+.action-btn {
+    padding: 0.8rem 1.6rem; /* Proper padding for better button dimensions */
+    border: none;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.action-btn:hover {
+    background-color: #45a049;
+}
+
+.display-box {
+    background-color: #e8e8e8;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.essay-textarea {
+    width: 100%; /* Full width of the container */
+    height: 300px; /* Increased height for more writing space */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none; /* Disable resizing */
+    outline: none; /* Removes the default focus outline */
+    box-sizing: border-box;
+    spellcheck: false; /* Disable spellcheck */
+}
+
+
+.text-controls {
+    display: flex;
+    justify-content: right;
+    margin-bottom: 10px; /* Spacing before the textarea */
+}
+
+.action-btn {
+    padding: 0.8rem 1.2rem;
+    margin-right: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.action-btn:hover {
+    background-color: #45a049;
+}
+
+.action-btn:last-child {
+    margin-right: 0; /* Removes margin from the last button */
+}
+
+.header-and-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.essay-header {
+    margin: 0; /* Removes default margin */
+    padding: 0;
+    color: #333;
+    font-size: 1.5rem; /* Adjusted for visibility */
+}

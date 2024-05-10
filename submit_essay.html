@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta viewport="width=device-width, initial-scale=1.0">
+    <title>Essay Submission</title>
+    <link rel="stylesheet" href="submit_essay.css">
+</head>
+<body>
+    <div class="container">
+        <div class="task-fetcher">
+            <button type="button" id="fetchIssue" class="action-btn">Fetch Issue Task</button>
+            <div id="issueDisplay" class="display-box"></div>
+        </div>
+
+        <div class="header-and-controls">
+            <h1 class="essay-header">Submit Your Essay</h1>
+            <div class="text-controls">
+                <button type="button" id="increaseTextSize" class="action-btn">Text+</button>
+                <button type="button" id="decreaseTextSize" class="action-btn">Text-</button>
+            </div>
+        </div>
+        
+        <form id="essayForm" class="essay-form">
+            <textarea id="essayText" class="essay-textarea" placeholder="Type your essay here..." required spellcheck="false"></textarea>
+            <button type="submit" class="action-btn">Submit Essay</button>
+        </form>
+        <div id="responseArea" class="display-box"></div>
+    </div>
+    <script src="submit_essay.js"></script>
+</body>
+</html>

@@ -39,4 +39,17 @@ document.getElementById('essayForm').onsubmit = function(event) {
     .catch(error => console.error('Error:', error));
 };
 
+document.getElementById('increaseTextSize').addEventListener('click', function() {
+    var textarea = document.getElementById('essayText');
+    var currentSize = parseFloat(window.getComputedStyle(textarea, null).getPropertyValue('font-size'));
+    textarea.style.fontSize = (currentSize + 2) + 'px';
+});
+
+document.getElementById('decreaseTextSize').addEventListener('click', function() {
+    var textarea = document.getElementById('essayText');
+    var currentSize = parseFloat(window.getComputedStyle(textarea, null).getPropertyValue('font-size'));
+    if (currentSize > 10) { // Prevents font size from becoming too small
+        textarea.style.fontSize = (currentSize - 2) + 'px';
+    }
+});
 
